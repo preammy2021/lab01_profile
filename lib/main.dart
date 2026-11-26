@@ -19,8 +19,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _likes = 0;
+
+  void _incrementLikes() {
+    setState(() {
+      _likes++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +42,25 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Lab L1 - 67113282'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person, size: 80),
-            SizedBox(height: 16),
-            Text(
+            const Icon(Icons.person, size: 80),
+            const SizedBox(height: 16),
+            const Text(
               'pakorn hnusawang - 67113282',
               style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Likes: $_likes',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: _incrementLikes,
+              child: const Text('Like'),
             ),
           ],
         ),
